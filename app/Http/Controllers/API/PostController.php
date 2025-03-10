@@ -82,12 +82,12 @@ class PostController extends BaseController
             $request->all(),[
                 'title'=>'required',
                 'description'=>'required',
-                'image'=>'required|mimes:png,jpg,jpeg'
+                 'image' => 'nullable|image|mimes:png,jpg,jpeg'
             ]
             );
             if($validator->fails()){
              
-                return $this->sendError('please check credential',$validator->errors()->all());
+                return $this->sendError('please check your input field',$validator->errors()->all());
 
             }
                 $postImage = Post::select('id','image')->where(['id'=>$id])->get();

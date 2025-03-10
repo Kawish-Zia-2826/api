@@ -65,8 +65,12 @@ class AuthController extends Controller
                 );
 
             }
+           
+
 
             if(Auth::attempt(['email' => $req->email, 'password' => $req->password])){
+
+        
                 $authUser = Auth::user();
                 return response()->json(
                     [
@@ -77,10 +81,15 @@ class AuthController extends Controller
                     ],
                     200
                 );
-            }else{
+            }
+            
+          
+            else{
+                $usr = $req->user();
                 return response()->json([
                     'status'=>false,
-                    'message'=>'you are not our user please register yourself'
+                    'message'=>'you are not our user please register yourself',
+                    'user'=>$usr
                 ],401);
             }
     }
